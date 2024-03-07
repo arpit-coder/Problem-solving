@@ -1,0 +1,30 @@
+
+
+public class App {
+    public static void main(String[] args) {
+        int[]nums={1,2,1};
+        int len = nums.length;
+        int[]result=new int[len*2];
+        result=getConcatenation(nums);
+        for(int ans : result){
+            System.out.print(ans + " ");
+        }
+   }
+         
+    public static int[] getConcatenation(int[] nums) {
+        int len = nums.length;
+        int[]result=new int[len*2];
+        int length =0;
+        for(int j=0; j<2;j++){
+           for(int i=0; i<nums.length;i++){
+               result[length]=nums[i];
+               length++;
+           }
+        }
+        return result; 
+     }
+ }
+    
+
+    
+
