@@ -5,7 +5,7 @@ public class App {
         int[]nums={3,2,4};
         int target=6;
         int len = nums.length;
-        int[]result=new int[len];
+        int[]result=new int[2];
         result=twoSum(nums,target);
         for(int ans : result){
             System.out.print(ans + " ");
