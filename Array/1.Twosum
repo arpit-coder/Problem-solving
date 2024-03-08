@@ -1,0 +1,39 @@
+
+
+public class App {
+    public static void main(String[] args) {
+        int[]nums={3,2,4};
+        int target=6;
+        int len = nums.length;
+        int[]result=new int[len];
+        result=twoSum(nums,target);
+        for(int ans : result){
+            System.out.print(ans + " ");
+        }
+        
+   }
+     
+    public static int[] twoSum(int[] nums, int target){
+        int len = nums.length;
+        int[]result=new int[2];
+        int length =0;
+        for(int j=0; j<nums.length-1;j++){    
+            for(int i=j+1; i<nums.length;i++){
+                if(target==nums[i]+nums[j]){       
+                    result[length]=j;
+                    result[length+1]=i;
+                    length++;
+                }else{
+                        break;
+                }
+            }
+            
+        }   
+            
+        return result; 
+    }
+ }
+    
+
+    
+
