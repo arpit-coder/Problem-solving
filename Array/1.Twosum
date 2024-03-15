@@ -24,7 +24,7 @@ public class App {
                     result[length+1]=i;
                     length++;
                 }else{
-                        break;
+                        
                 }
             }
             
