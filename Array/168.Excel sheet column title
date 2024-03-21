@@ -1,0 +1,22 @@
+
+
+public class App {
+    public static void main(String[] args) {
+        int columnNumber=27;
+        String result=convertToTitle (columnNumber);
+        System.out.println(result);
+    }
+
+    public static String convertToTitle(int columnNumber) {  
+      String result="";
+        while(columnNumber>0) {
+            
+        
+            char c=(char) ('A'+(columnNumber-1)%26);
+            result=c+result;
+            columnNumber=(columnNumber-1)/26;
+        }
+        return result;
+      
+    }
+}
