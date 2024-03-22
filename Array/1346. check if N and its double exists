@@ -1,0 +1,29 @@
+import java.util.Arrays;
+
+public class s {
+    public static void main(String[] args) {
+        int[] arr = {5,2,10,3};
+        // int[] result=new int[7];
+        boolean  result=checkIfExist(arr) ;
+        System.out.println(result);
+        //   for(int ans : result){
+        //           System.out.print(ans + " ");
+        //       }
+     }
+    public static boolean checkIfExist(int[] arr) {
+        boolean result=false;
+        
+        for(int i=0;i<arr.length-1;i++){
+            for(int j=i+1;j<arr.length;j++){
+                if(arr[i]==2*arr[j]||arr[j]==2*arr[i]){
+                    result=true;
+                }
+
+                
+            }
+        }
+        
+        return result;
+    }
+    
+}
