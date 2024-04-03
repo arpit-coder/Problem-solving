@@ -1,0 +1,24 @@
+public class a {
+    public static void main(String[] args) {
+        int[]arr = {0,1,0,3,12};
+        
+       arr=checkIfExist(arr) ;
+        //System.out.println(index);
+       for(int ans :arr){
+                    System.out.print(ans + " ");
+              }
+      }
+    public static int[] checkIfExist(int[]arr) {
+        //int max=0;
+        for(int i=0;i<arr.length-1;i++){
+            for(int j=i+1;j<arr.length;j++){
+                if(arr[i]==0 && arr[j]!=0){
+                    int temp=arr[i];
+                    arr[i]=arr[j];
+                    arr[j]=temp;
+                }
+            }
+        }  
+        return arr;     
+    }
+}
