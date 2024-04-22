@@ -1,0 +1,26 @@
+
+
+public class pending {
+    public static void main(String[] args) {
+       int[] nums ={9,6,4,2,3,5,7,0,1};
+       
+        int result=duplicateZeros(nums);
+         System.out.println(result);
+        //  for(int ans : result){
+        //          System.out.print(ans + " ");
+        //      }
+    }
+    public static int duplicateZeros(int[] nums) {
+      
+        
+      int result=nums.length;
+      for(int i=0; i<nums.length; i++){
+          
+            result+= i-nums[i];
+          }
+          
+      
+      return result;
+  
+    }
+}
