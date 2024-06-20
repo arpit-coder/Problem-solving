@@ -1,0 +1,37 @@
+import java.util.Arrays;
+
+public class a {
+    public static void main(String[] args) {
+        int[]arr = {2,2,3,1,1,2};
+        int index=checkIfExist(arr);
+       
+        System.out.println(index);
+        // for(int ans : arr){
+        //     System.out.print(ans + " ");
+        // }
+    }
+      
+    public static int checkIfExist(int[]arr) {
+    Arrays.sort(arr);
+    int count=0;
+    int k=0;
+    for (int i = 0; i < arr.length; i++) {
+        if (count==0) {
+            
+            k=arr[i];
+        }
+        if(k==arr[i]){
+            
+            count++;
+        }else count -= 1;
+        
+    }
+  
+    return k;
+              
+   }
+}    
+
+
+
+
