@@ -1,0 +1,185 @@
+Right rotate an array by D places
+
+
+2
+
+0
+Problem Statement: Given an array of N integers and an integer D, right rotate the array by D place.
+
+Pre-requisite: Left Rotate the Array by one
+
+Examples:
+
+Example 1:
+Input: N = 7, array[] = {1,2,3,4,5,6,7} , d = 3
+Output: 5 6 7 1 2 3 4
+Explanation: The array is rotated to the right by 3 positions.
+
+Example 2:
+Input: N = 6, array[] = {3,7,8,9,10,11} , d = 2 
+Output: 10 11 3 7 8 9
+Explanation: The array is rotated to the right by 2 positions.
+Disclaimer: Don't jump directly to the solution, try it out yourself first.
+Problem Link 1.
+
+Solution
+Observation:
+Before moving on to the solution, let’s understand how the rotation will happen for a given array. The following illustration will clarify the rotation technique.
+Assume the given array is {1,2,3,4,5,6,7} and d = 3.
+
+
+Now, in the above case, if we closely observe, we can notice that if the value of d = 7 i.e. the size of the array, after rotation the array will be exactly similar to the given array. And the same case can be observed when the value of d is 14, 21, 28, or a multiple of 7.
+
+So, we can conclude, that if the number of rotations is a multiple of the size of the array, the rotations will have no effect on the given array.
+if( d % n == 0) rotated array = given array, where d = number of rotations, n =size of the array
+
+So, if d is greater than n(i.e. Size of the array), the effective number of rotation will be (d % n).
+
+Brute Force Approach: 
+The steps are as follows:
+
+First, we will perform (d%n) to get the effective number of rotations.
+We will store the last d elements(from index n-d to n-1) in a temporary array using a loop. The loop will run from index n-d to n-1(0-based indexing). Inside the loop, we will do this: temp[i-(n-d)] = arr[i] (For example, the (n-d)th element of the array will go to the 0th index in the temporary array). 
+We will shift the first (n-d) elements by d places to the right using a loop(say i) that will start from the index (n-d-1) and run back up to index 0 (in case of 0-based indexing). Inside the loop, the shifting will be like: arr[i+d] = arr[i].
+Unlike left rotation, here the loop will run backward shifting the (n-d)th element first and the 0th element last.
+After that, we will place the elements of the temporary array in the first d places of the given array using another loop that starts from 0 and runs up to d-1 (0-based index). So, to place the elements in the correct position, inside the loop, we will do this: arr[i] = temp[i].
+Assume the given array is {1,2,3,4,5,6,7} and d = 3.
+
+
+Code:
+
+C++
+import java.util.*;
+
+public class tUf {
+
+    static void rightRotate(int arr[], int n, int d) {
+
+        if (n == 0) return;
+
+        // Get the effective number of rotations:
+        d = d % n;
+
+        // checking if d is a multiple of n:
+        if (d == 0) return;
+
+        int temp[] = new int[d]; // temporary array
+
+        //step 1: Copying last d elements
+        // in the temporary array:
+        for (int i = n - d; i < n; i++) {
+            temp[i - (n - d)] = arr[i];
+        }
+
+        // step 2: Shift first (n-d) elements
+        // to the right by d places in the given array:
+        for (int i = n - d - 1; i >= 0; i--) {
+            arr[i + d] = arr[i];
+        }
+
+        //step 3: Place the elements of the temporary
+        // array in the first d places of the given array:
+        for (int i = 0; i < d; i++) {
+            arr[i] = temp[i];
+        }
+    }
+
+    public static void main(String args[]) {
+        int n = 7;
+        int arr[] = {1, 2, 3, 4, 5, 6, 7};
+        int d = 3;
+
+        System.out.println("Before rotation:");
+        for (int i = 0; i < n; i++)
+            System.out.print( arr[i] + " ");
+        System.out.println();
+
+        rightRotate(arr, n, d);
+        System.out.println("After rotation:");
+        for (int i = 0; i < n; i++)
+            System.out.print(arr[i] + " ");
+        System.out.println();
+    }
+
+}  
+Output:
+Before rotation:
+1 2 3 4 5 6 7
+After rotation:
+5 6 7 1 2 3 4  
+
+Time Complexity: O(d)+O(n-d)+O(d) = O(n+d), where n = size of the array, d = the number of rotations. Each term represents each loop used in the code.
+
+Space Complexity: O(d) extra space as we are using a temporary array of size d.
+
+Optimized Approach(without using any extra space): Using “Reversal Algorithm” 
+This is a straightforward method. The steps are as follows:
+
+Step 1: Reverse the subarray with the last d elements (reverse(arr+n-d, arr+n)).
+Step 2: Reverse the subarray with the first (n-d) elements (reverse(arr, arr+n-d)).
+Step 3: Finally reverse the whole array (reverse(arr, arr+n)).
+Assume the given array is {1,2,3,4,5,6,7} and d = 3.
+
+
+Note: In C++ we can use the in-built reverse() function for array reversal. If we have no in-built function, we can implement one like the following:
+
+
+Code:
+
+C++
+import java.util.*;
+
+public class tUf {
+    static void reverse(int[] arr, int start, int end) {
+        while (start <= end) {
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;
+            end--;
+        }
+    }
+    static void rightRotate(int arr[], int n, int d) {
+
+        if (n == 0) return;
+
+        // Get the effective number of rotations:
+        d = d % n;
+
+        //step 1: reverse last d elements:
+        reverse(arr, n - d, n - 1);
+
+        //step 2: reverse first (n-d) elements:
+        reverse(arr, 0, n - d - 1);
+
+        //step 3: reverse whole array:
+        reverse(arr, 0, n - 1);
+    }
+
+    public static void main(String args[]) {
+        int n = 7;
+        int arr[] = {1, 2, 3, 4, 5, 6, 7};
+        int d = 3;
+
+        System.out.println("Before rotation:");
+        for (int i = 0; i < n; i++)
+            System.out.print( arr[i] + " ");
+        System.out.println();
+
+        rightRotate(arr, n, d);
+        System.out.println("After rotation:");
+        for (int i = 0; i < n; i++)
+            System.out.print(arr[i] + " ");
+        System.out.println();
+    }
+
+} 
+Output:
+Before rotation:
+1 2 3 4 5 6 7
+After rotation:
+5 6 7 1 2 3 4 
+
+Time Complexity: O(d)+O(n-d)+O(n) = O(2*n), where n = size of the array, d = the number of rotations. Each term corresponds to each reversal step.
+
+Space Complexity: O(1) since no extra space is required.
