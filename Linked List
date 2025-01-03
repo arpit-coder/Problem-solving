@@ -121,3 +121,17 @@ Singly Linked Lists: In a singly linked list, each node points to the next node 
 Doubly Linked Lists: In this each node points to both the next node and the previous node, thus allowing it for bidirectional connectivity.
 
 Circular Linked Lists: In a circular linked list, the last node points back to the head node, forming a closed loop.
+
+class Solution {
+    static Node constructLL(int arr[]) {
+        Node head = new Node(arr[0]);
+        Node mover = head;
+        for(int i=1;i<arr.length;i++){
+            Node temp = new Node(arr[i]);
+            mover.next = temp;
+            mover=temp;
+        
+        }
+        return head;
+    }
+}
